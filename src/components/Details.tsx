@@ -1,14 +1,29 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { RootState } from "../store/store";
 
+interface PokemonDetails {
+    types: { slot: number; type: { name: string } }[];
+    order: number;
+    name: string;
+    height: number;
+    weight: number;
+    stats: { stat: { name: string }; base_stat: number }[];
+    abilities: { slot: number; ability: { name: string } }[];
+}
 export default function Details() {
     const selectedPokemon = useSelector(
-        (state) => state.pokemons.selectedPokemon
+        (state: RootState) => state.pokemons.selectedPokemon
     );
-    const pokemonImage = useSelector((state) => state.pokemons.pokemonImage);
+    const pokemonImage = useSelector(
+        (state: RootState) => state.pokemons.pokemonImage
+    );
 
-    const [pokemonDetails, setPokemonDetails] = useState(null);
+    const [pokemonDetails, setPokemonDetails] = useState<PokemonDetails | null>(
+        null
+    );
 
     useEffect(() => {
         fetchPokemonData();
@@ -29,13 +44,11 @@ export default function Details() {
         return (
             <div className="home-view-container details">
                 <div className="left-side">
-                    {console.log(pokemonDetails)}
-
                     <img
                         src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png"
                         alt=""
                     />
-                    <img src={pokemonImage} alt="" />
+                    <img src={pokemonImage || ""} alt="" />
                 </div>
                 <div className="right-side">
                     <Link to="/">Go Back</Link>

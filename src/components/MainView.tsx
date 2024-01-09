@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { RootState } from "../store/store";
+import React from "react";
 
 import {
     setPokemons,
@@ -11,8 +13,10 @@ import Pokeball from "../assets/pokeball.png";
 import "./styles.scss";
 
 export default function Main() {
-    const pokemons = useSelector((state) => state.pokemons.pokemons);
-    const pokemonImage = useSelector((state) => state.pokemons.pokemonImage);
+    const pokemons = useSelector((state: RootState) => state.pokemons.pokemons);
+    const pokemonImage = useSelector(
+        (state: RootState) => state.pokemons.pokemonImage
+    );
 
     const dispatch = useDispatch();
     const navigateTo = useNavigate();
@@ -80,7 +84,7 @@ export default function Main() {
                     src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png"
                     alt=""
                 />
-                <img src={pokemonImage} alt="" />
+                <img src={pokemonImage || ""} alt="" />
             </div>
             <div className="rigth-side">
                 <ul>

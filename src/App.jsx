@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
-import Details from "./components/Details";
+import Details from "./components/Details.tsx";
 import "./App.css";
 import Main from "./components/MainView";
 
